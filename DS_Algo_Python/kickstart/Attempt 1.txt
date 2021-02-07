@@ -1,0 +1,22 @@
+
+
+def knapSack(W , wt , val , n): 
+  
+    if n == 0 or W == 0 : 
+        return 0
+    if (wt[n-1] > W): 
+        return knapSack(W , wt , val , n-1)
+    else: 
+        return max(val[n-1] + knapSack(W-wt[n-1] , wt , val , n-1), 
+                   knapSack(W , wt , val , n-1))
+
+
+if __name__ == '__main__':
+    t = int(input())
+    for i in range(1, t + 1):
+        n, b = [int(s) for s in input().split(" ")]
+        prices = [int(s) for s in input().split(" ")]
+        values = [1 for p in prices]
+
+        maxHouses = knapSack(b,prices,values,n)
+        print("Case #{}: {}".format(i, maxHouses))
